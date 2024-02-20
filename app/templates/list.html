@@ -1,0 +1,12 @@
+{% block content %}
+<ul>
+{% for c in list %}
+<li>Time: {{c.command_time}} </p>
+         <ul>         
+         <li>Input: {{c.command_input}}</li>
+         <li>Output: {{c.command_output}}</li>         
+         </ul>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}
