@@ -13,10 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: GitHub Tag Name example
-       run:|
-         echo "Tag name from GITHUB_REF_NAME:$GITHUB_REF_NAME"
-         echo "Tag name from github.ref_name:${{  github.ref_name }}"
+        run: |
+          echo "Tag name from GITHUB_REF_NAME:$GITHUB_REF_NAME"
+          echo "Tag name from github.ref_name:${{  github.ref_name }}"
