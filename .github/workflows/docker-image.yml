@@ -10,9 +10,8 @@ jobs:
   github-example-tags:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-        uses: actions/checkout@v3
-    - name: GitHub Tag Name example
-        run: |
-          echo "Tag name from GITHUB_REF_NAME:$GITHUB_REF_NAME"
-          echo "Tag name from github.ref_name:${{  github.ref_name }}"
+      - name: Get current tag
+        id: get-current-tag
+        uses: zingimmick/github-action-get-current-tag@v1
+      - name: Print tag
+        run: echo ${{steps.get-current-tag.outputs.tag}}
