@@ -1,7 +1,8 @@
-FROM python:3.11
+FROM python:3.11-slim
 
 LABEL maintainer="MyslivetsOleg"
 LABEL kind="test-only" 
+ARG APP_VERSION=1.1
 
 RUN mkdir /app
 WORKDIR /app
@@ -10,17 +11,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
 
-ARG APP_VERSION=1.1
 
-ENV app_user="appuser"
+ENV app_user="appuser" \
+    db_user="default_user" \
+    db_pass="default_pass" \
+    db_server_ip="localhost" \
+    db_port="5432" \
+    fad_app_version=${APP_VERSION}
 
-ENV db_user="default_user"
-ENV db_pass="default_pass"
-ENV db_server_ip="localhost"
-ENV db_port="5432"
-
-RUN groupadd -r $app_user && useradd -g $app_user $app_user
-RUN chown -R $app_user:$app_user /app
+RUN groupadd -r $app_user && useradd -g $app_user $app_user && chown -R $app_user:$app_user /app
 USER $app_user
 
 CMD [ "python","main.py" ]
