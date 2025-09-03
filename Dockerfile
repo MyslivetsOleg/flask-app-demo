@@ -7,7 +7,9 @@ ARG APP_VERSION=1.1
 RUN mkdir /app
 WORKDIR /app
 COPY app/ /app/
-RUN pip install --no-cache-dir -r requirements.txt
+
+COPY requirements.txt /tmp/
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 EXPOSE 5000
 
